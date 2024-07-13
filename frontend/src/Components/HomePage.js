@@ -24,7 +24,7 @@ const HomePage = () => {
             <Box sx={{ position: 'absolute', padding: '5px', top: '5px', right: '15px'  }}>
                 <Button type='submit' variant='contained' color='info' onClick={goToLogin} >Login</Button>
             </Box>
-            <Box sx={{padding: '40px'}}><h1>FOOD MART</h1></Box>
+            <Box sx={{padding: '40px'}}><h1>BITE BUDDY</h1></Box>
             <Box sx={{padding: '5px'}}><Restaurant /></Box>
 
 
