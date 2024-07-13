@@ -70,7 +70,7 @@ const NavBar = () => {
                             style={{ cursor: 'pointer' }}
                             sx={{ textDecoration: 'none', color: 'black' }}
                         >
-                            <ListItemText primary='My List' />
+                            <ListItemText primary='Favorites' />
                         </Link>
                     </ListItem>
                     <ListItem onClick={handleMyCart}>
@@ -82,7 +82,7 @@ const NavBar = () => {
                             style={{ cursor: 'pointer' }}
                             sx={{ textDecoration: 'none', color: 'black' }}
                         >
-                            <ListItemText primary='Orders' />
+                            <ListItemText primary='Cart' />
                         </Link>
                     </ListItem>
 

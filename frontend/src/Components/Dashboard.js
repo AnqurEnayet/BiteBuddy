@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
 import { DashboardRounded, FavoriteRounded } from '@mui/icons-material'
 import { AppBar, Box, IconButton, Toolbar, Drawer, ListItem, ListItemText, List, Link, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Table, Modal, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 import NavBar from './NavBar'
+import { MyContext } from './Reusable/MyContext'
 
 const Dashboard = () => {
 
@@ -11,9 +12,11 @@ const Dashboard = () => {
 
   const navigate = useNavigate()
 
+  const { receipts } = useContext(MyContext)
+
   const [orderDetails, setOrderDetails] = useState([{
     'id': 1,
-    'name': 'MadChef',
+    'name': 'MADCHEF',
     'items': 3,
     'price': 500
   }])
@@ -74,9 +77,26 @@ const Dashboard = () => {
                   <TableCell>{details.id}</TableCell>
                   <TableCell>{details.name}</TableCell>
                   <TableCell>{details.items}</TableCell>
-                  <TableCell>{details.price}</TableCell>
+                  <TableCell>${details.price}</TableCell>
                 </TableRow>
               ))}
+
+              {receipts.map((receipt, receiptIndex) => (
+                receiptIndex>0 &&(
+                <TableRow
+                  key={receiptIndex}
+                  hover={true}
+                  style={{ cursor: 'pointer' }}
+                  sx={{ '&:nth-of-type(odd)': { backgroundColor: 'whitesmoke' } }}
+                  onClick={() => showFullDetails(receiptIndex+1)}
+                >
+                  <TableCell>{receiptIndex+1}</TableCell>
+                  <TableCell>{receipt.name}</TableCell>
+                  <TableCell>{receipt.totalItems}</TableCell>
+                  <TableCell>${receipt.totalPrice}</TableCell>
+                </TableRow>
+              )))}
+
             </TableBody>
           </Table>
         </TableContainer>

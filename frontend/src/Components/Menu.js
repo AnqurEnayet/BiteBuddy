@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom'
 import { AppBar, Tabs, Tab, Container, Typography, Box, List, ListItem, ListItemText, Button } from '@mui/material';
+import { MyContext } from './Reusable/MyContext';
+import { NearMeDisabled } from '@mui/icons-material';
+import NavBar from './NavBar';
 
 const Menus = () => {
 
   const location = useLocation()
   const navigate = useNavigate()
+  const {orders, addOrder} = useContext(MyContext)
+
+  const [itemTotal, setItemTotal] = useState(0)
 
   const [selectedTab, setSelectedTab] = useState(0);
 
@@ -13,11 +19,14 @@ const Menus = () => {
     setSelectedTab(newValue);
   };
 
-  const handleCart =(itemName, itemPrice)=>{
-    
+  const handleCart =(itemId, itemName, itemPrice)=>{
+    setItemTotal((prevItemTotal)=>(prevItemTotal+1))
+    addOrder({name: location.state.name, itemId: itemId, itemName: itemName, price: itemPrice, itemCount: 1})
+    //console.log(orders.itemName)
   }
 
   return (
+    
     <Box
       sx={{
         display: 'flex',
@@ -25,13 +34,26 @@ const Menus = () => {
         alignItems: 'center'
       }}
     >
+      <Box>
+      <NavBar/>
+      </Box>
+      
+      <Box
+        component="main"
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
       <h1>{location.state.name}</h1>
       <AppBar position="static"
         sx={{
           backgroundColor: 'white',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center'
+          alignItems: 'center',
+          width: '250%'
         }}>
         <Tabs value={selectedTab} onChange={handleTabChange}>
           {location.state.categories.map((category, index) => (
@@ -58,7 +80,8 @@ const Menus = () => {
                       <br />
                       Ingredients: {item.ingredients.join(", ")}
                     </ListItemText>
-                    <Button variant='contained' onClick={handleCart(item.name, item.price)}>Add</Button>
+                    <Button variant='contained' onClick={()=>handleCart(item.itemId, item.name, item.price)}
+                      sx={{marginLeft: '100px'}}>Add</Button>
                   </ListItem>
                 </Box>
               ))}
@@ -66,6 +89,7 @@ const Menus = () => {
           </Box>
         ))}
       </Container>
+      </Box>
     </Box>
   )
 }

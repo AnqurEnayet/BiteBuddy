@@ -7,10 +7,12 @@ import MyList from './Components/MyList';
 import MyCart from './Components/MyCart'
 import HomePage from './Components/HomePage';
 import Menus from './Components/Menu'
+import MyProvider from './Components/Reusable/MyContext';
 //import './App.css';
 
 function App() {
   return (
+    <MyProvider>
     <Box>
       <Router>
         <Routes>
@@ -24,6 +26,7 @@ function App() {
       </Router>
       
     </Box>
+    </MyProvider>
       
   );
 }
