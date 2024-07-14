@@ -7,7 +7,10 @@ const MyProvider = ({ children }) => {
     const [orders, setOrders] = useState([{}])
     const [receipts, setReceipts] = useState([{}])
     const [favorites, setFavorites] = useState([])
-    const [activeUser, setAcitveUser] = useState('')
+    const [activeUser, setAcitveUser] = useState({
+        email: '',
+        username: ''
+    })
 
     const addOrder = (newOrder) => {
         setOrders((prevOrders) => [...prevOrders, newOrder]);
@@ -30,8 +33,18 @@ const MyProvider = ({ children }) => {
     }
 
     const handleActiveUser = (userEmail) => {
-        const user = userEmail.substring(0, '@')
-        setAcitveUser(user)
+        const user = userEmail.split('@')[0]
+        setAcitveUser({
+            email: userEmail,
+            username: user
+        })
+    }
+
+    const handleUserLogOut = (userEmail) => {
+        setAcitveUser({
+            email: '',
+            username: ''
+        })
     }
 
 
@@ -39,7 +52,7 @@ const MyProvider = ({ children }) => {
         <MyContext.Provider
             value={{
                 orders, receipts, activeUser, favorites,
-                addFavorites, handleActiveUser, addOrder, emptyOrder, addReceipts
+                addFavorites, handleActiveUser, handleUserLogOut, addOrder, emptyOrder, deleteOrder, addReceipts
             }}
         >
             {children}

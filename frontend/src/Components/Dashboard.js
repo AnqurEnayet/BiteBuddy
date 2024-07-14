@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 
-import { DashboardRounded, FavoriteRounded } from '@mui/icons-material'
+import { AccountCircle, DashboardRounded, FavoriteRounded } from '@mui/icons-material'
 import { AppBar, Box, IconButton, Toolbar, Drawer, ListItem, ListItemText, List, Link, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Table, Modal, Typography } from '@mui/material'
 import { useLocation, useNavigate } from 'react-router-dom'
 import NavBar from './NavBar'
@@ -12,7 +12,7 @@ const Dashboard = () => {
 
   const navigate = useNavigate()
 
-  const { receipts } = useContext(MyContext)
+  const { receipts, activeUser } = useContext(MyContext)
 
   const [orderDetails, setOrderDetails] = useState([{
     'id': 1,
@@ -45,12 +45,25 @@ const Dashboard = () => {
       }}
     >
       <NavBar />
+      <Box sx={{ position: 'absolute', padding: '5px', top: '5px', right: '15px' }}>
+          <IconButton edge='start' color='inherit'>
+            <AccountCircle/>
+            <Typography
+              hover='true'
+              style={{ cursor: 'pointer' }}
+              sx={{ textDecoration: 'none', color: 'black', ml: '5px' }}
+            >{activeUser.username}
+            </Typography>
+          </IconButton>
+
+      </Box>
       <Box
         component="main"
         sx={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          mt: '5%'
         }}
       >
 

@@ -1,29 +1,36 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Box, TextField, Button, IconButton, FormControl, InputLabel, Input } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { MyContext } from './Reusable/MyContext'
 
 const Login = () => {
 
     const[userInput, setUserInput] = useState({
-        'email': '',
-        'password': ''
+        email: '',
+        password: ''
     })
 
     const navigate = useNavigate()
+
+    const {activeUser, handleActiveUser} = useContext(MyContext)
 
     const handleChange =(e)=>{
         const newUserInput = {...userInput}
         setUserInput(newUserInput => ({...newUserInput, [e.target.name]: e.target.value}))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit =async (e, userEmail) => {
         e.preventDefault() 
         console.log("Email: ", userInput.email)
         console.log("Password: ", userInput.password)
 
+        handleActiveUser(userInput.email)
+
+        //console.log("Username: ", activeUser.username)
+
         setUserInput({
-            'email': '',
-            'password': ''
+            email: '',
+            password: ''
         })
 
         navigate("/dashboard")
@@ -37,10 +44,11 @@ const Login = () => {
             }}
         >
             <h1>Login Page</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={()=>handleSubmit(event, userInput.email)}>
                 <FormControl fullWidth margin="normal" required>
-                    <InputLabel htmlFor="email">Email</InputLabel>
+                    <InputLabel htmlFor='email'>Email</InputLabel>
                     <Input
+                    id='email'
                     type='email'
                     name='email'
                     placeholder='Email'
@@ -51,6 +59,7 @@ const Login = () => {
                 <FormControl fullWidth margin="normal" required>
                     <InputLabel htmlFor="password">Password</InputLabel>
                     <Input
+                    id="password"
                     type='password'
                     name='password'
                     placeholder='Password'

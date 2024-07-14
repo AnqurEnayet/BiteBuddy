@@ -1,14 +1,15 @@
 import React, { useContext, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import NavBar from './NavBar'
-import { Box, Button, List, ListItem, ListItemText, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
+import { Box, Button, Grid, IconButton, List, ListItem, ListItemText, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import { MyContext } from './Reusable/MyContext'
+import { AccountCircle, Remove } from '@mui/icons-material'
 
 const MyCart = () => {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const { orders, emptyOrder, deleteOrder, addReceipts } = useContext(MyContext)
+    const { activeUser, orders, emptyOrder, deleteOrder, addReceipts } = useContext(MyContext)
 
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -29,9 +30,9 @@ const MyCart = () => {
         setModalOpen(false)
     }
 
-    const handleReceipt=async()=>{
+    const handleReceipt = async () => {
 
-        addReceipts({name: orders[1]?.name, totalItems: orders.length-1, totalPrice: totalPrice})
+        addReceipts({ name: orders[1]?.name, totalItems: orders.length - 1, totalPrice: totalPrice })
         emptyOrder()
         navigate("/dashboard")
 
@@ -45,8 +46,27 @@ const MyCart = () => {
                 alignItems: 'center',
             }}
         >
-            <h1>My Order List</h1>
+            <Box sx={{ position: 'absolute', padding: '5px', top: '5px', right: '15px' }}>
+                <IconButton edge='start' color='inherit'>
+                    <AccountCircle />
+                    <Typography
+                        hover='true'
+                        style={{ cursor: 'pointer' }}
+                        sx={{ textDecoration: 'none', color: 'black', ml: '5px' }}
+                    >
+                        {activeUser.username}
+                    </Typography>
+                </IconButton>
+            </Box>
             <NavBar />
+            <Box
+            sx={{
+                mt: '5%'
+            }}
+        >
+            <h1>My Order List</h1>
+        </Box>
+
             <Box>
                 <TableContainer component={Paper}>
                     <Table>
@@ -69,6 +89,11 @@ const MyCart = () => {
                                         <TableCell>{order.itemName}</TableCell>
                                         <TableCell>{order.itemCount}</TableCell>
                                         <TableCell>${order.price}</TableCell>
+                                        <TableCell>
+                                            <IconButton onClick={()=>deleteOrder(orderIndex)}>
+                                                <Remove color='error' />
+                                            </IconButton>
+                                        </TableCell>
                                     </TableRow>
 
                                 )))}
@@ -87,22 +112,31 @@ const MyCart = () => {
                     </Table>
                 </TableContainer>
                 {orders.length - 1 >= 1 && (
-                    <Box
+                    <Grid
                         sx={{
                             display: 'flex',
-                            flexDirection: 'column',
+                            justifyContent: 'center',
                             alignItems: 'center',
-                            marginTop: '20px'
+                            marginTop: '10px',
+                            padding: '20px' 
                         }}
                     >
-                        <Button variant='contained' color='info' onClick={() => handleConfirmation()}>Order Now</Button>
-                    </Box>
+                        <Button variant='contained' color='success' onClick={() => handleConfirmation()}>Order Now</Button>
+                        <Button 
+                        variant='contained' 
+                        color='error' 
+                        onClick={()=>emptyOrder()}
+                        sx={{marginLeft: '10px'}}
+                        >
+                            Cancel
+                        </Button>
+                    </Grid>
                 )}
             </Box>
 
             <Modal
                 open={modalOpen}
-                onClose={()=>handleModalClose()}
+                onClose={() => handleModalClose()}
             >
                 <Box
                     sx={{
@@ -117,11 +151,11 @@ const MyCart = () => {
                         p: 4,
                     }}
                 >
-                            <Typography variant="h6" component="h2">
-                                Do you confirm your order?
-                            </Typography>
-                            <Button color='success' onClick={()=>handleReceipt()}>Yes</Button>
-                            <Button color='error' onClick={()=>handleModalClose()}>No</Button>
+                    <Typography variant="h6" component="h2">
+                        Do you confirm your order?
+                    </Typography>
+                    <Button color='success' onClick={() => handleReceipt()}>Yes</Button>
+                    <Button color='error' onClick={() => handleModalClose()}>No</Button>
                 </Box>
             </Modal>
         </Box>
