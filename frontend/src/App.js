@@ -17,7 +17,7 @@ function App() {
     <Box>
       <Router>
         <Routes>
-          <Route path='/' element={<HomePage/>}/>
+          <Route exact path='/' element={<HomePage/>}/>
           <Route path='/menu' element={<Menus/>}/>
           <Route path='/signup' element={<SignUp/>}/>
           <Route path='/login' element={<Login/>}/>

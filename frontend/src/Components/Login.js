@@ -20,7 +20,7 @@ const Login = () => {
         setUserInput(newUserInput => ({ ...newUserInput, [e.target.name]: e.target.value }))
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         console.log("Email: ", userInput.email)
         console.log("Password: ", userInput.password)
@@ -51,7 +51,7 @@ const Login = () => {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <form onSubmit={() => handleSubmit(event)}>
+                <form onSubmit={(e) => handleSubmit(e)}>
                     <FormControl fullWidth margin="normal" required>
                         <InputLabel htmlFor='email'>Email</InputLabel>
                         <Input
@@ -85,8 +85,8 @@ const Login = () => {
 
                     </FormControl>
                 </form>
-                <Grid item>
-                    <Link href="/signup" variant="body2">
+                <Grid>
+                    <Link href='/signup' variant="body2">
                         {"Don't have an account? Sign Up"}
                     </Link>
                 </Grid>

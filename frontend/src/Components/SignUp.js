@@ -49,7 +49,7 @@ const SignUp = () => {
             <Typography component="h1" variant="h5">
                 Sign Up
             </Typography>
-            <form onSubmit={() => handleSubmit(event)}>
+            <form onSubmit={(e) => handleSubmit(e)}>
                 <FormControl fullWidth margin="normal" required>
                     <InputLabel htmlFor='email'>Email</InputLabel>
                     <Input
@@ -97,8 +97,8 @@ const SignUp = () => {
 
                 </FormControl>
             </form>
-            <Grid item>
-                <Link href="/dashboard" variant="body2">
+            <Grid>
+                <Link to='/login' variant="body2">
                     {"Already have an account? Sign In"}
                 </Link>
             </Grid>
