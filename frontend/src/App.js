@@ -8,6 +8,7 @@ import MyCart from './Components/MyCart'
 import HomePage from './Components/HomePage';
 import Menus from './Components/Menu'
 import MyProvider from './Components/Reusable/MyContext';
+import SignUp from './Components/SignUp';
 //import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomePage/>}/>
           <Route path='/menu' element={<Menus/>}/>
+          <Route path='/signup' element={<SignUp/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path='/myList' element={<MyList/>}/>
