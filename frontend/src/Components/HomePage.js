@@ -48,7 +48,7 @@ const HomePage = () => {
                 )
                 }
             </Box>
-            <Box sx={{ padding: '40px' }}><h1>BITE BUDDY</h1></Box>
+            <Box sx={{ padding: '40px' }}><h1>SNACK BUDDY</h1></Box>
             <Box sx={{ padding: '5px', ml: "5%" }}><Restaurant /></Box>
 
 

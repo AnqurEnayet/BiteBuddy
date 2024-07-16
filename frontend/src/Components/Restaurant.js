@@ -8,7 +8,7 @@ const Restaurant = () => {
 
   const navigate = useNavigate()
 
-  const {favorites, addFavorites} = useContext(MyContext)
+  const {favorites, activeUser, addFavorites} = useContext(MyContext)
 
   const [restaurantInfo, setRestaurantInfo] = useState([{
     id: 1,
@@ -125,7 +125,7 @@ const Restaurant = () => {
 
   const [menu, setMenu] = useState([{}])
 
-  const goToItems = (id) => {
+  const goToItems = async (id) => {
     const restaurant = restaurantInfo.find((card) => card.id === id);
     if (restaurant) {
       navigate("/menu", { state: { name: restaurant.name, id: restaurant.id, categories: restaurant.categories, itemId: restaurant.itemId } });
@@ -133,7 +133,7 @@ const Restaurant = () => {
   };
 
   const handleMyList=(cardId)=>{
-    if (!favorites.find(fav=>fav.id===cardId)){
+    if (!favorites.find(fav=>fav.id===cardId) && activeUser.email!==''){
     const favorite = restaurantInfo.find(res=> res.id===cardId)
     addFavorites(favorite)
   }

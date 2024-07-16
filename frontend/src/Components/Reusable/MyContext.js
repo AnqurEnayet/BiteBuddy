@@ -7,6 +7,7 @@ const MyProvider = ({ children }) => {
     const [orders, setOrders] = useState([{}])
     const [receipts, setReceipts] = useState([{}])
     const [favorites, setFavorites] = useState([])
+    const [cartMenu, setCartMenu] = useState(0)
     const [activeUser, setAcitveUser] = useState({
         email: '',
         username: ''
@@ -47,12 +48,16 @@ const MyProvider = ({ children }) => {
         })
     }
 
+    const handleCartMenu=(id)=>{
+        setCartMenu(id)
+    }
+
 
     return (
         <MyContext.Provider
             value={{
-                orders, receipts, activeUser, favorites,
-                addFavorites, handleActiveUser, handleUserLogOut, addOrder, emptyOrder, deleteOrder, addReceipts
+                orders, receipts, activeUser, favorites, cartMenu,
+                addFavorites, handleActiveUser, handleUserLogOut, addOrder, emptyOrder, deleteOrder, addReceipts, handleCartMenu
             }}
         >
             {children}
