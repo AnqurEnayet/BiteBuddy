@@ -12,16 +12,16 @@ const SignUp = () => {
         username: ''
     })
 
-    const {handleActiveUser} = useContext(MyContext)
+    const { handleActiveUser } = useContext(MyContext)
 
     const navigate = useNavigate()
 
-    const handleChange=(e)=>{
-        const newUser = {...userInfo}
-        setUserInfo(newUser=>({...newUser, [e.target.name]: e.target.value }))
+    const handleChange = (e) => {
+        const newUser = { ...userInfo }
+        setUserInfo(newUser => ({ ...newUser, [e.target.name]: e.target.value }))
     }
 
-    const handleSubmit=async(e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault()
 
         console.log('Email:', userInfo.email)
@@ -35,74 +35,74 @@ const SignUp = () => {
 
 
     return (
-        <Container component='main' maxWidth="xs" sx={{mt: '7%'}}>
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-            }}
-        >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <LockRounded/>
-            </Avatar>
-            <Typography component="h1" variant="h5">
-                Sign Up
-            </Typography>
-            <form onSubmit={(e) => handleSubmit(e)}>
-                <FormControl fullWidth margin="normal" required>
-                    <InputLabel htmlFor='email'>Email</InputLabel>
-                    <Input
-                        id='email'
-                        type='email'
-                        name='email'
-                        placeholder='Email'
-                        value={userInfo.email}
-                        onChange={handleChange}
-                        autoComplete='true'
-                    />
-                </FormControl>
-                <FormControl fullWidth margin="normal" required>
-                    <InputLabel htmlFor="password">Password</InputLabel>
-                    <Input
-                        id="password"
-                        type='password'
-                        name='password'
-                        placeholder='Password'
-                        value={userInfo.password}
-                        onChange={handleChange}
-                        autoComplete='true'
-                    />
-                </FormControl>
-                <FormControl fullWidth margin="normal" required>
-                    <InputLabel htmlFor="username">Username</InputLabel>
-                    <Input
-                        id="username"
-                        type='username'
-                        name='username'
-                        placeholder='Username'
-                        value={userInfo.username}
-                        onChange={handleChange}
-                        autoComplete='true'
-                    />
-                </FormControl>
-                <FormControl fullWidth margin='normal'>
-                    <Button
-                        type='submit'
-                        variant='contained'
-                        color='primary'
-                    >
-                        Sign In
-                    </Button>
+        <Container component='main' maxWidth="xs" sx={{ mt: '7%' }}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}
+            >
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <LockRounded />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Sign Up
+                </Typography>
+                <form onSubmit={(e) => handleSubmit(e)}>
+                    <FormControl fullWidth margin="normal" required>
+                        <InputLabel htmlFor="username">Username</InputLabel>
+                        <Input
+                            id="username"
+                            type='username'
+                            name='username'
+                            placeholder='Username'
+                            value={userInfo.username}
+                            onChange={handleChange}
+                            autoComplete='true'
+                        />
+                    </FormControl>
+                    <FormControl fullWidth margin="normal" required>
+                        <InputLabel htmlFor='email'>Email</InputLabel>
+                        <Input
+                            id='email'
+                            type='email'
+                            name='email'
+                            placeholder='Email'
+                            value={userInfo.email}
+                            onChange={handleChange}
+                            autoComplete='true'
+                        />
+                    </FormControl>
+                    <FormControl fullWidth margin="normal" required>
+                        <InputLabel htmlFor="password">Password</InputLabel>
+                        <Input
+                            id="password"
+                            type='password'
+                            name='password'
+                            placeholder='Password'
+                            value={userInfo.password}
+                            onChange={handleChange}
+                            autoComplete='true'
+                        />
+                    </FormControl>
+                    <FormControl fullWidth margin='normal'>
+                        <Button
+                            type='submit'
+                            variant='contained'
+                            color='primary'
+                        >
+                            Sign In
+                        </Button>
 
-                </FormControl>
-            </form>
-            <Grid>
-                <Link to='/login' variant="body2">
-                    {"Already have an account? Sign In"}
-                </Link>
-            </Grid>
-        </Box>
+                    </FormControl>
+                </form>
+                <Grid>
+                    <Link to='/login' variant="body2">
+                        {"Already have an account? Sign In"}
+                    </Link>
+                </Grid>
+            </Box>
         </Container>
     )
 }
