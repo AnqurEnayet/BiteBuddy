@@ -5,6 +5,7 @@ import { Box, Button, IconButton, Link, Typography } from '@mui/material'
 import Restaurant from './Restaurant'
 import { MyContext } from './Reusable/MyContext'
 import { AccountCircle } from '@mui/icons-material'
+import LoginSession from './Reusable/LoginSession'
 
 const HomePage = () => {
     const location = useLocation()
@@ -29,15 +30,7 @@ const HomePage = () => {
                 {activeUser.email === '' ? (
                     <Button type='submit' variant='contained' color='info' onClick={goToLogin}>Login</Button>
                 ) : (
-                    <IconButton edge='start' color='inherit'>
-                        <AccountCircle />
-                        <Typography
-                            hover='true'
-                            style={{ cursor: 'pointer' }}
-                            sx={{ textDecoration: 'none', color: 'black', ml: '5px' }}
-                        >{activeUser.username}
-                        </Typography>
-                    </IconButton>
+                    <LoginSession />
 
                 )}
 

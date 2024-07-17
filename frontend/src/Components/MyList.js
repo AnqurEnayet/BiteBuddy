@@ -4,6 +4,7 @@ import NavBar from './NavBar'
 import { Box, Card, CardActionArea, CardContent, Container, Grid, IconButton, Typography } from '@mui/material'
 import { MyContext } from './Reusable/MyContext'
 import { AccountCircle } from '@mui/icons-material'
+import LoginSession from './Reusable/LoginSession'
 
 const MyList = () => {
     const location = useLocation()
@@ -28,18 +29,7 @@ const MyList = () => {
             }}
         >
             <NavBar />
-            <Box sx={{ position: 'absolute', padding: '5px', top: '5px', right: '15px' }}>
-                <IconButton edge='start' color='inherit'>
-                    <AccountCircle />
-                    <Typography
-                        hover='true'
-                        style={{ cursor: 'pointer' }}
-                        sx={{ textDecoration: 'none', color: 'black', ml: '5px' }}
-                    >
-                        {activeUser.username}
-                    </Typography>
-                </IconButton>
-            </Box>
+            <LoginSession/>
             <Container sx={{
                 display: 'flex',
                 flexDirection: 'column',

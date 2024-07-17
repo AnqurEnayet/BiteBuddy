@@ -1,4 +1,4 @@
-import { DashboardRounded, FavoriteRounded, Search, ShoppingCart } from '@mui/icons-material'
+import { DashboardRounded, FavoriteRounded, Home, Search, ShoppingCart } from '@mui/icons-material'
 import { AppBar, Box, IconButton, Toolbar, Drawer, ListItem, ListItemText, List, Link } from '@mui/material'
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -39,14 +39,14 @@ const NavBar = () => {
                 <List>
                     <ListItem onClick={handleSearch}>
                         <IconButton edge='start' color='inherit' aria-label='search'>
-                            <Search />
+                            <Home />
                         </IconButton>
                         <Link to='/dashboard'
                             hover='true'
                             style={{ cursor: 'pointer' }}
                             sx={{ textDecoration: 'none', color: 'black' }}
                         >
-                            <ListItemText primary='Search' />
+                            <ListItemText primary='Home' />
                         </Link>
                     </ListItem>
                     <ListItem onClick={handleDashboard}>

@@ -5,6 +5,7 @@ import { AppBar, Box, IconButton, Toolbar, Drawer, ListItem, ListItemText, List,
 import { useLocation, useNavigate } from 'react-router-dom'
 import NavBar from './NavBar'
 import { MyContext } from './Reusable/MyContext'
+import LoginSession from './Reusable/LoginSession'
 
 const Dashboard = () => {
 
@@ -45,7 +46,7 @@ const Dashboard = () => {
       }}
     >
       <NavBar />
-      <Box sx={{ position: 'absolute', padding: '5px', top: '5px', right: '15px' }}>
+      {/*<Box sx={{ position: 'absolute', padding: '5px', top: '5px', right: '15px' }}>
           <IconButton edge='start' color='inherit'>
             <AccountCircle/>
             <Typography
@@ -56,7 +57,8 @@ const Dashboard = () => {
             </Typography>
           </IconButton>
 
-      </Box>
+      </Box>*/}
+      <LoginSession/>
       <Box
         component="main"
         sx={{

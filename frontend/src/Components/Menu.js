@@ -4,6 +4,7 @@ import { AppBar, Tabs, Tab, Container, Typography, Box, List, ListItem, ListItem
 import { MyContext } from './Reusable/MyContext';
 import { AccountCircle, NearMeDisabled } from '@mui/icons-material';
 import NavBar from './NavBar';
+import LoginSession from './Reusable/LoginSession';
 
 const Menus = () => {
 
@@ -48,15 +49,7 @@ const Menus = () => {
         {activeUser.email === '' ? (
           <Button type='submit' variant='contained' color='info' onClick={goToLogin}>Login</Button>
         ) : (
-          <IconButton edge='start' color='inherit'>
-            <AccountCircle/>
-            <Typography
-              hover='true'
-              style={{ cursor: 'pointer' }}
-              sx={{ textDecoration: 'none', color: 'black', ml: '5px' }}
-            >{activeUser.username}
-            </Typography>
-          </IconButton>
+          <LoginSession/>
 
         )}
 
@@ -77,7 +70,7 @@ const Menus = () => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            width: '250%'
+            width: '1000px'
           }}>
           <Tabs value={selectedTab} onChange={handleTabChange}>
             {location.state.categories.map((category, index) => (
@@ -93,20 +86,21 @@ const Menus = () => {
               hidden={selectedTab !== index}
               p={3}
               mt={3}
+              sx={{ width: '100%' }}
             >
-              <Typography variant="h4">{category.name}</Typography>
+              {/*<Typography variant="h4" sx={{ marginRight: '150px'}}>{category.name}</Typography>*/}
               <List>
                 {category.items.map((item, itemIndex) => (
                   <Box key={itemIndex}>
                     <ListItem>
-                      <ListItemText>
+                      <ListItemText sx={{ marginLeft: '150px'}}>
                         <strong>{item.name}</strong> - ${item.price}
                         <br />
                         Ingredients: {item.ingredients.join(", ")}
                       </ListItemText>
                       <Button variant='contained' 
                       onClick={activeUser.email === '' ? (goToLogin): () => handleCart(item.itemId, item.name, item.price)}
-                        sx={{ marginLeft: '10%' }}>Add</Button>
+                        sx={{ marginRight: '150px'}}>Add</Button>
                     </ListItem>
                   </Box>
                 ))}

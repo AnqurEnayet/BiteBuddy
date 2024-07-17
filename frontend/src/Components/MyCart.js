@@ -4,6 +4,7 @@ import NavBar from './NavBar'
 import { Box, Button, Grid, IconButton, List, ListItem, ListItemText, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material'
 import { MyContext } from './Reusable/MyContext'
 import { AccountCircle, Remove } from '@mui/icons-material'
+import LoginSession from './Reusable/LoginSession'
 
 const MyCart = () => {
     const location = useLocation()
@@ -46,19 +47,8 @@ const MyCart = () => {
                 alignItems: 'center',
             }}
         >
-            <Box sx={{ position: 'absolute', padding: '5px', top: '5px', right: '15px' }}>
-                <IconButton edge='start' color='inherit'>
-                    <AccountCircle />
-                    <Typography
-                        hover='true'
-                        style={{ cursor: 'pointer' }}
-                        sx={{ textDecoration: 'none', color: 'black', ml: '5px' }}
-                    >
-                        {activeUser.username}
-                    </Typography>
-                </IconButton>
-            </Box>
             <NavBar />
+            <LoginSession/>
             <Box
             sx={{
                 mt: '5%'
