@@ -33,11 +33,11 @@ const MyProvider = ({ children }) => {
         setFavorites(prevOne => [...prevOne, newOne])
     }
 
-    const handleActiveUser = (userEmail) => {
-        const user = userEmail.split('@')[0]
+    const handleActiveUser = (userEmail, userName) => {
+        //const user = userEmail.split('@')[0]
         setAcitveUser({
             email: userEmail,
-            username: user
+            username: userName
         })
     }
 

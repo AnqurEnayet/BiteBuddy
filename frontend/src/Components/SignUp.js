@@ -1,6 +1,7 @@
 import { LockRounded } from '@mui/icons-material'
 import { Avatar, Box, Button, Container, FormControl, Grid, Input, InputLabel, Typography } from '@mui/material'
 import React, { useContext, useState } from 'react'
+import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import { MyContext } from './Reusable/MyContext'
 
@@ -24,12 +25,27 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        console.log('Email:', userInfo.email)
-        console.log('username: ', userInfo.username)
+        try {
+            const response = await axios.post('http://localhost:5000/signup', userInfo);
+            if (response.data.used) {
+                alert(response.data.message)
+            } else {
+                console.log('Email:', userInfo.email)
+                console.log('username: ', userInfo.username)
+                handleActiveUser(userInfo.email, userInfo.username)
 
-        handleActiveUser(userInfo.email)
+                navigate("/dashboard")
+            }
 
-        navigate("/dashboard")
+
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+
+
+
+
 
     }
 

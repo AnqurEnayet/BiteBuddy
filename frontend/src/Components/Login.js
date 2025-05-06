@@ -1,4 +1,6 @@
 import React, { useContext, useState } from 'react'
+import axios from 'axios'
+
 import { Box, TextField, Button, IconButton, FormControl, InputLabel, Input, Avatar, Typography, Grid, Link, Container } from '@mui/material'
 import { Form, useNavigate } from 'react-router-dom'
 import { MyContext } from './Reusable/MyContext'
@@ -20,12 +22,27 @@ const Login = () => {
         setUserInput(newUserInput => ({ ...newUserInput, [e.target.name]: e.target.value }))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log("Email: ", userInput.email)
-        console.log("Password: ", userInput.password)
 
-        handleActiveUser(userInput.email)
+        try {
+            const response = await axios.post('http://localhost:5000/login', userInput);
+            if (response.data.used) {
+                await handleActiveUser(userInput.email, response.data.username)
+                navigate("/dashboard")
+            } else {
+                alert(response.data.message)
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        //console.log("Email: ", userInput.email)
+        //console.log("Password: ", userInput.password)
+
+        //const username = await userInput.email.split('@')[0]
+
+        //handleActiveUser(userInput.email, username)
 
         //console.log("Username: ", activeUser.username)
 
@@ -37,7 +54,7 @@ const Login = () => {
         navigate("/dashboard")
     }
     return (
-        <Container component='main' maxWidth="xs" sx={{mt: '7%'}}>
+        <Container component='main' maxWidth="xs" sx={{ mt: '7%' }}>
             <Box
                 sx={{
                     display: 'flex',
@@ -75,13 +92,13 @@ const Login = () => {
                         />
                     </FormControl>
                     <FormControl fullWidth margin='normal'>
-                            <Button
-                                type='submit'
-                                variant='contained'
-                                color='primary'
-                            >
-                                Sign In
-                            </Button>
+                        <Button
+                            type='submit'
+                            variant='contained'
+                            color='primary'
+                        >
+                            Sign In
+                        </Button>
 
                     </FormControl>
                 </form>
